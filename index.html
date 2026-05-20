@@ -6,9 +6,10 @@
         content="3D Gaussian Splatting with Self-Constrained Priors for High-Fidelity Surface Reconstruction">
   <meta name="keywords" content="3D Gaussian Splatting, Surface Reconstruction, TSDF, Neural Rendering, Radiance Fields">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+
   <title>GSPrior: 3D Gaussian Splatting with Self-Constrained Priors</title>
 
-  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <!-- Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -18,27 +19,135 @@
     }
 
     gtag('js', new Date());
-
     gtag('config', 'G-PYVRSFMDRL');
   </script>
 
+  <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
         rel="stylesheet">
 
-  <link rel="stylesheet" href="./static/css/bulma.min.css">
-  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
-  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
-  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <!-- Bulma CSS from CDN -->
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+
+  <!-- FontAwesome from CDN -->
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <!-- Academicons from CDN -->
   <link rel="stylesheet"
         href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
-  <link rel="stylesheet" href="./static/css/index.css">
-  <!-- <link rel="icon" href="./static/images/favicon.svg"> -->
 
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script defer src="./static/js/fontawesome.all.min.js"></script>
-  <script src="./static/js/bulma-carousel.min.js"></script>
-  <script src="./static/js/bulma-slider.min.js"></script>
-  <script src="./static/js/index.js"></script>
+  <style>
+    body {
+      font-family: 'Google Sans', 'Noto Sans', Arial, sans-serif;
+    }
+
+    .publication-title {
+      font-family: 'Google Sans', 'Noto Sans', Arial, sans-serif;
+      font-size: 2.3rem;
+      line-height: 1.25;
+      font-weight: 700;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .publication-authors {
+      margin-top: 0.6rem;
+      margin-bottom: 0.3rem;
+    }
+
+    .author-block {
+      display: inline-block;
+      margin-right: 0.25rem;
+    }
+
+    .publication-links {
+      margin-top: 1.2rem;
+    }
+
+    .hero-body {
+      padding-top: 3rem;
+      padding-bottom: 2rem;
+    }
+
+    .section {
+      padding-top: 2.5rem;
+      padding-bottom: 2.5rem;
+    }
+
+    .container.is-max-desktop {
+      max-width: 1100px;
+    }
+
+    .content p {
+      font-size: 1.05rem;
+      line-height: 1.65;
+    }
+
+    img.center {
+      display: block;
+      max-width: 100%;
+      height: auto;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .method-image {
+      width: 100%;
+      max-width: 1000px;
+    }
+
+    .result-image {
+      width: 100%;
+      max-width: 1000px;
+    }
+
+    pre {
+      white-space: pre-wrap;
+      word-wrap: break-word;
+    }
+
+    footer.footer {
+      padding-top: 2rem;
+      padding-bottom: 2rem;
+    }
+
+    @media screen and (max-width: 768px) {
+      .publication-title {
+        font-size: 1.7rem;
+      }
+
+      .hero-body {
+        padding-top: 2rem;
+        padding-bottom: 1.5rem;
+      }
+
+      .section {
+        padding-top: 2rem;
+        padding-bottom: 2rem;
+      }
+
+      .content p {
+        font-size: 1rem;
+      }
+    }
+	.math-inline {
+	  font-family: "Times New Roman", "Cambria Math", "STIX Two Math", serif;
+	  font-size: 1.08em;
+	  white-space: nowrap;
+	}
+
+	.math-inline i {
+	  font-style: italic;
+	}
+
+	.math-inline sup {
+	  font-size: 0.7em;
+	  vertical-align: super;
+	  margin-left: 1px;
+	}
+  </style>
 </head>
 
 <body>
@@ -48,6 +157,7 @@
     <div class="container is-max-desktop">
       <div class="columns is-centered">
         <div class="column has-text-centered">
+
           <h1 class="title is-1 publication-title">
             3D Gaussian Splatting with Self-Constrained Priors for High-Fidelity Surface Reconstruction
           </h1>
@@ -58,7 +168,7 @@
 
           <div class="is-size-5 publication-authors">
             <span class="author-block">
-              Takeshi Noda<sup>1</sup>,
+              <a href="https://github.com/takeshie">Takeshi Noda<sup>1</sup>,
             </span>
             <span class="author-block">
               <a href="https://yushen-liu.github.io/">Yu-Shen Liu</a><sup>1</sup>,
@@ -79,27 +189,29 @@
 
           <div class="column has-text-centered">
             <div class="publication-links">
-              <!-- PDF Link. -->
+
+              <!-- PDF Link -->
               <span class="link-block">
                 <a href="https://arxiv.org/pdf/2603.19682"
                    class="external-link button is-normal is-rounded is-dark">
                   <span class="icon">
-                    <i class="fas fa-file-pdf"></i>
+                    <i class="fa-solid fa-file-pdf"></i>
                   </span>
                   <span>Paper</span>
                 </a>
               </span>
 
-              <!-- Code Link. -->
+              <!-- Code Link -->
               <span class="link-block">
                 <a href="https://github.com/takeshie/GSPrior"
                    class="external-link button is-normal is-rounded is-dark">
                   <span class="icon">
-                    <i class="fab fa-github"></i>
+                    <i class="fa-brands fa-github"></i>
                   </span>
                   <span>Code</span>
                 </a>
               </span>
+
             </div>
           </div>
 
@@ -109,65 +221,106 @@
   </div>
 </section>
 
+<section class="section">
+  <div class="container is-max-desktop">
+
+    <!-- Abstract -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <div class="content has-text-justified">
+        <video controls autoplay muted loop playsinline style="width: 100%; border-radius: 10px;">
+          <source src="./resources/video.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
 <section class="section">
   <div class="container is-max-desktop">
-    <!-- Abstract. -->
+
+    <!-- Abstract -->
     <div class="columns is-centered has-text-centered">
       <div class="column is-four-fifths">
         <h2 class="title is-3" style="margin-top: -30px">Abstract</h2>
         <div class="content has-text-justified">
           <p>
-            Recent advances in radiance field modeling, including NeRF and 3D Gaussian Splatting (3DGS), have significantly improved novel view synthesis and 3D surface rendering. Although 3DGS has shown advantages over NeRF in terms of rendering quality and speed, there is still room for improvement in recovering high-fidelity surfaces through 3DGS. To resolve this issue, we propose self-constrained priors to constrain the learning of 3D Gaussians, aiming for more accurate depth rendering. Our self-constrained prior is derived from a TSDF grid obtained by fusing the depth maps rendered from current 3D Gaussians. The prior measures a distance field around the estimated surface, offering a band centered at the surface for imposing more specific constraints on 3D Gaussians, such as removing Gaussians outside the band, moving Gaussians closer to the surface, and encouraging larger or smaller opacity in a geometry-aware manner. More importantly, our prior can be regularly updated by the most recent depth images, which are usually more accurate and complete. In addition, the prior can progressively narrow the band to tighten the imposed constraints. We justify our idea and demonstrate the superiority of our method over state-of-the-art methods on widely used benchmarks.
+            Rendering 3D surfaces has been revolutionized within the modeling of radiance fields through either 3DGS or NeRF. Although 3DGS has shown advantages over NeRF in terms of rendering quality or speed, there is still room for improvement in recovering high fidelity surfaces through 3DGS. To resolve this issue, we propose a self-constrained prior to constrain the learning of 3D Gaussians, aiming for more accurate depth rendering. Our self-constrained prior is derived from a TSDF grid that is obtained by fusing the depth maps rendered with current 3D Gaussians. The prior measures a distance field around the estimated surface, offering a band centered at the surface for imposing more specific constraints on 3D Gaussians, such as removing Gaussians outside the band, moving Gaussians closer to the surface, and encouraging larger or smaller opacity in a geometry-aware manner. More importantly, our prior can be regularly updated by the most recent depth images which are usually more accurate and complete. In addition, the prior can also progressively narrow the band to tighten the imposed constraints. We justify our idea and report our superiority over the state-of-the-art methods in evaluations on widely used benchmarks.
           </p>
         </div>
       </div>
     </div>
+
   </div>
 </section>
 
 
 <section class="section">
   <div class="container is-max-desktop">
-    <!-- Method. -->
+
+    <!-- Method -->
     <div class="columns is-centered has-text-centered">
       <div class="column is-full-width">
         <h2 class="title is-3" style="margin-top: -20px">Method</h2>
-        <img src="./resources/dtu-recon.png" class="center">
+
+        <img src="./resources/our_method.png" class="center method-image">
+
         <div class="content has-text-justified">
-          <p style="margin-top: 30px">
-            Overview of our method. Given 3D Gaussians $g$, we employ a distance field specified by a fused TSDF grid as our prior $f^{t}$. With $f^{t}$, we define a bandwidth around the surface and iteratively refine $f^{t}$ with updated depth renderings. We also apply Gaussian geometric constraints $(\mathrm{GC})$ that are related to the interpolated distance $s$, Gaussian centers $\mu$, and TSDF gradients $\nabla f^{t}$ for high-fidelity surface reconstruction.
-          </p>
+			<p style="margin-top: 30px">
+			  Overview of our method. Given 3D Gaussians
+			  <span class="math-inline"><i>g</i></span>, we employ a distance field specified by a fused TSDF grid as our prior
+			  <span class="math-inline"><i>f</i><sup> t</sup></span>. With
+			  <span class="math-inline"><i>f</i><sup> t</sup></span>, we define a bandwidth around the surface and iteratively refine
+			  <span class="math-inline"><i>f</i><sup> t</sup></span> with updated depth renderings. We also apply Gaussian geometric constraints
+			  <span class="math-inline">(GC)</span> that are related to the interpolated distance
+			  <span class="math-inline"><i>s</i></span>, Gaussian centers
+			  <span class="math-inline">&mu;</span>, and TSDF gradients
+			  <span class="math-inline">&nabla;<i>f</i><sup> t</sup></span> for high-fidelity surface reconstruction.
+			</p>
         </div>
+
       </div>
     </div>
+
   </div>
 </section>
 
 
 <section class="section">
   <div class="container is-max-desktop">
-    <!-- Results. -->
+
+    <!-- Results -->
     <div class="columns is-centered">
       <div class="column is-full-width">
-        <h2 class="title is-3 has-text-centered" style="margin-top: -30px">Visualization Results</h2>
+
+        <h2 class="title is-3 has-text-centered" style="margin-top: -30px">
+          Visualization Results
+        </h2>
 
         <h3 class="title is-4">Comparison on Synthetic Dataset</h3>
         <div class="content has-text-justified">
-          <img src="./resources/dtu-recon.png" class="center">
+          <img src="./resources/syn-recon.png" class="center result-image">
         </div>
 
         <h3 class="title is-4">Comparison on DTU Dataset</h3>
         <div class="content has-text-justified">
-          <img src="./resources/dtu-recon.png" class="center">
+          <img src="./resources/dtu-recon.png" class="center result-image">
         </div>
 
         <h3 class="title is-4">Comparison on TNT Dataset</h3>
         <div class="content has-text-justified">
-          <img src="./resources/dtu-recon.png" class="center">
+          <img src="./resources/tnt-recon.png" class="center result-image">
+        </div>
+
+        <h3 class="title is-4">Comparison on MIP-NeRF 360 Dataset</h3>
+        <div class="content has-text-justified">
+          <img src="./resources/mip-recon.png" class="center result-image">
         </div>
       </div>
     </div>
+
   </div>
 </section>
 
@@ -175,12 +328,11 @@
 <section class="section" id="BibTeX">
   <div class="container is-max-desktop content">
     <h2 class="title">BibTeX</h2>
-    <pre><code>@inproceedings{noda2026gsprior,
-  title={3D Gaussian Splatting with Self-Constrained Priors for High-Fidelity Surface Reconstruction},
+    <pre><code>@article{noda20263d,
+  title={3D Gaussian Splatting with Self-Constrained Priors for High Fidelity Surface Reconstruction},
   author={Noda, Takeshi and Liu, Yu-Shen and Han, Zhizhong},
-  booktitle={Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition},
-  year={2026}
-}</code></pre>
+  journal={arXiv preprint arXiv:2603.19682},
+  year={2026}}</code></pre>
   </div>
 </section>
 
