@@ -3,10 +3,10 @@
 <head>
   <meta charset="utf-8">
   <meta name="description"
-        content="GS-Pull">
-  <meta name="keywords" content="Novel view synthesis, Neural rendering, Radiance fields, Neural networks, Quadtree">
+        content="3D Gaussian Splatting with Self-Constrained Priors for High-Fidelity Surface Reconstruction">
+  <meta name="keywords" content="3D Gaussian Splatting, Surface Reconstruction, TSDF, Neural Rendering, Radiance Fields">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>GSPrior</title>
+  <title>GSPrior: 3D Gaussian Splatting with Self-Constrained Priors</title>
 
   <!-- Global site tag (gtag.js) - Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script>
@@ -40,6 +40,7 @@
   <script src="./static/js/bulma-slider.min.js"></script>
   <script src="./static/js/index.js"></script>
 </head>
+
 <body>
 
 <section class="hero">
@@ -47,13 +48,17 @@
     <div class="container is-max-desktop">
       <div class="columns is-centered">
         <div class="column has-text-centered">
-          <h1 class="title is-1 publication-title">3D Gaussian Splatting with Self-Constrained Priors for High Fidelity Surface Reconstruction</h1>
+          <h1 class="title is-1 publication-title">
+            3D Gaussian Splatting with Self-Constrained Priors for High-Fidelity Surface Reconstruction
+          </h1>
+
           <div class="column is-full_width">
             <h2 class="title is-4">CVPR 2026</h2>
           </div>
+
           <div class="is-size-5 publication-authors">
             <span class="author-block">
-              Takehi Noda</a><sup>1</sup>,
+              Takeshi Noda<sup>1</sup>,
             </span>
             <span class="author-block">
               <a href="https://yushen-liu.github.io/">Yu-Shen Liu</a><sup>1</sup>,
@@ -64,8 +69,12 @@
           </div>
 
           <div class="is-size-5 publication-authors">
-            <span class="author-block"><sup>1</sup>School of Software, Tsinghua University, Beijing, China,</span>
-            <span class="author-block"><sup>2</sup>Department of Computer Science, Wayne State University, Detroit, USA</span>
+            <span class="author-block">
+              <sup>1</sup>School of Software, Tsinghua University, Beijing, China,
+            </span>
+            <span class="author-block">
+              <sup>2</sup>Department of Computer Science, Wayne State University, Detroit, USA
+            </span>
           </div>
 
           <div class="column has-text-centered">
@@ -75,7 +84,7 @@
                 <a href="https://arxiv.org/pdf/2603.19682"
                    class="external-link button is-normal is-rounded is-dark">
                   <span class="icon">
-                      <i class="fas fa-file-pdf"></i>
+                    <i class="fas fa-file-pdf"></i>
                   </span>
                   <span>Paper</span>
                 </a>
@@ -86,21 +95,19 @@
                 <a href="https://github.com/takeshie/GSPrior"
                    class="external-link button is-normal is-rounded is-dark">
                   <span class="icon">
-                      <i class="fab fa-github"></i>
+                    <i class="fab fa-github"></i>
                   </span>
                   <span>Code</span>
-                  </a>
+                </a>
               </span>
-
             </div>
-
           </div>
+
         </div>
       </div>
     </div>
   </div>
 </section>
-
 
 
 <section class="section">
@@ -111,20 +118,17 @@
         <h2 class="title is-3" style="margin-top: -30px">Abstract</h2>
         <div class="content has-text-justified">
           <p>
-            Rendering 3D surfaces has been revolutionized within the modeling of radiance fields through either 3DGS or NeRF. Although 3DGS has shown advantages over NeRF in terms of rendering quality or speed, there is still room for improvement in recovering high fidelity surfaces through 3DGS. To resolve this issue, we propose a self-constrained prior to constrain the learning of 3D Gaussians, aiming for more accurate depth rendering. Our self-constrained prior is derived from a TSDF grid that is obtained by fusing the depth maps rendered with current 3D Gaussians. The prior measures a distance field around the estimated surface, offering a band centered at the surface for imposing more specific constraints on 3D Gaussians, such as removing Gaussians outside the band, moving Gaussians closer to the surface, and encouraging larger or smaller opacity in a geometry-aware manner. More importantly, our prior can be regularly updated by the most recent depth images which are usually more accurate and complete. In addition, the prior can also progressively narrow the band to tighten the imposed constraints. We justify our idea and report our superiority over the state-of-the-art methods in evaluations on widely used benchmarks.          </p>
+            Recent advances in radiance field modeling, including NeRF and 3D Gaussian Splatting (3DGS), have significantly improved novel view synthesis and 3D surface rendering. Although 3DGS has shown advantages over NeRF in terms of rendering quality and speed, there is still room for improvement in recovering high-fidelity surfaces through 3DGS. To resolve this issue, we propose self-constrained priors to constrain the learning of 3D Gaussians, aiming for more accurate depth rendering. Our self-constrained prior is derived from a TSDF grid obtained by fusing the depth maps rendered from current 3D Gaussians. The prior measures a distance field around the estimated surface, offering a band centered at the surface for imposing more specific constraints on 3D Gaussians, such as removing Gaussians outside the band, moving Gaussians closer to the surface, and encouraging larger or smaller opacity in a geometry-aware manner. More importantly, our prior can be regularly updated by the most recent depth images, which are usually more accurate and complete. In addition, the prior can progressively narrow the band to tighten the imposed constraints. We justify our idea and demonstrate the superiority of our method over state-of-the-art methods on widely used benchmarks.
+          </p>
         </div>
       </div>
     </div>
-
   </div>
 </section>
 
 
-
-
 <section class="section">
   <div class="container is-max-desktop">
-
     <!-- Method. -->
     <div class="columns is-centered has-text-centered">
       <div class="column is-full-width">
@@ -132,24 +136,22 @@
         <img src="./resources/dtu-recon.png" class="center">
         <div class="content has-text-justified">
           <p style="margin-top: 30px">
-            Overview of our method. Given 3D Gaussians $g$, we employ a distance field specified by a fused TSDF grid as our prior $f^{t}$. With $f^{t}$, we define a bandwidth by the surface and iteratively refine $f^{t}$ with updated depth renderings. We also apply Gaussian geometric constraints $(\mathrm{GC})$ that are related to interpolated distance $s$, centers $\mu$ and gradients $\nabla f^{t}$ for high fidelity surface reconstruction.
+            Overview of our method. Given 3D Gaussians $g$, we employ a distance field specified by a fused TSDF grid as our prior $f^{t}$. With $f^{t}$, we define a bandwidth around the surface and iteratively refine $f^{t}$ with updated depth renderings. We also apply Gaussian geometric constraints $(\mathrm{GC})$ that are related to the interpolated distance $s$, Gaussian centers $\mu$, and TSDF gradients $\nabla f^{t}$ for high-fidelity surface reconstruction.
           </p>
         </div>
-
       </div>
     </div>
-    <!--/ Animation. -->
-
   </div>
 </section>
 
+
 <section class="section">
   <div class="container is-max-desktop">
-
     <!-- Results. -->
-    <div class="columns is-centered ">
+    <div class="columns is-centered">
       <div class="column is-full-width">
         <h2 class="title is-3 has-text-centered" style="margin-top: -30px">Visualization Results</h2>
+
         <h3 class="title is-4">Comparison on Synthetic Dataset</h3>
         <div class="content has-text-justified">
           <img src="./resources/dtu-recon.png" class="center">
@@ -166,22 +168,19 @@
         </div>
       </div>
     </div>
-
   </div>
-</section>
-
 </section>
 
 
 <section class="section" id="BibTeX">
   <div class="container is-max-desktop content">
     <h2 class="title">BibTeX</h2>
-     <pre><code>@article{noda20263d,
-	  title={3D Gaussian Splatting with Self-Constrained Priors for High Fidelity Surface Reconstruction},
-	  author={Noda, Takeshi and Liu, Yu-Shen and Han, Zhizhong},
-	  journal={arXiv preprint arXiv:2603.19682},
-	  year={2026}}
-</code></pre>
+    <pre><code>@inproceedings{noda2026gsprior,
+  title={3D Gaussian Splatting with Self-Constrained Priors for High-Fidelity Surface Reconstruction},
+  author={Noda, Takeshi and Liu, Yu-Shen and Han, Zhizhong},
+  booktitle={Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition},
+  year={2026}
+}</code></pre>
   </div>
 </section>
 
@@ -192,11 +191,15 @@
       <div class="column is-8">
         <div class="content">
           <p>
-            This website is licensed under a <a rel="license"
-                                                href="http://creativecommons.org/licenses/by-sa/4.0/">Creative
-            Commons Attribution-ShareAlike 4.0 International License</a>.
-            This webpage template is from <a href="https://github.com/nerfies/nerfies.github.io">Nerfies</a>. 
-            We sincerely thank <a href="https://keunhong.com/">Keunhong Park</a> for developing and open-sourcing this template.
+            This website is licensed under a
+            <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">
+              Creative Commons Attribution-ShareAlike 4.0 International License
+            </a>.
+            This webpage template is from
+            <a href="https://github.com/nerfies/nerfies.github.io">Nerfies</a>.
+            We sincerely thank
+            <a href="https://keunhong.com/">Keunhong Park</a>
+            for developing and open-sourcing this template.
           </p>
         </div>
       </div>
